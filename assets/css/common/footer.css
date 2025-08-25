@@ -8,8 +8,24 @@
     max-width: calc(var(--main-width) + var(--gap) * 2);
     margin: auto;
     padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     text-align: center;
     line-height: 24px;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.visit-record {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
 }
 
 .footer span {
