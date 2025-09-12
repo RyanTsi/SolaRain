@@ -2,9 +2,11 @@
 <footer class="footer">
     
     <div class="footer-left">
-        {{- if site.Params.ShowICPLicensing }}
-        <div class="ICP-Licensing">
-            <span> {{ site.Params.ICPLicensing.value }} </span>
+        {{- if site.Params.ShowFilingNumber }}
+        <div class="filingNumber" style="display: flex; align-items: center; gap: 8px">
+            <a href="https://beian.miit.gov.cn/" target="_blank">{{ site.Params.FilingNumber.ICPFilingNumber }}</a>
+            <img src="/images/filingImage.png" alt="" height="10" width="10">
+            <a href="https://beian.mps.gov.cn/#/query/webSearch?code=33019202002708" rel="noreferrer" target="_blank">{{ site.Params.FilingNumber.PSCFilingNumber }}</a>
         </div>
         {{- end }}
 

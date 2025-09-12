@@ -1,3 +1,9 @@
+@media (max-width: 768px) {
+    .visit-record {
+        display: none;
+    }
+}
+
 .footer,
 .top-link {
     font-size: 12px;
