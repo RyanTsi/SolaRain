@@ -26,7 +26,7 @@
     {{- $tag := . -}}
     {{- $tagLinks = $tagLinks | append (printf "<span>%s</span>" $tag) -}}
   {{- end -}}
-  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $tagLinks " · ") -}}
+  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $tagLinks "&nbsp;·&nbsp;") -}}
 {{- end -}}
 {{- end -}}
 
@@ -37,12 +37,12 @@
     {{- $category := . -}}
     {{- $categoryLinks = $categoryLinks | append (printf "<span>%s</span>" $category) -}}
   {{- end -}}
-  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $categoryLinks " · ") -}}
+  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $categoryLinks "&nbsp;·&nbsp;") -}}
 {{- end -}}
 {{- end -}}
 
 {{- if gt (len $tagCategoryMeta) 0 -}}
-  {{- $scratch.Add "meta" (slice (delimit $tagCategoryMeta " | ")) -}}
+  {{- $scratch.Add "meta" (slice (delimit $tagCategoryMeta "&nbsp;|&nbsp;")) -}}
 {{- end -}}
 
 {{- with ($scratch.Get "meta") }}
