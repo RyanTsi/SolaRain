@@ -26,7 +26,7 @@
     {{- $tag := . -}}
     {{- $tagLinks = $tagLinks | append (printf "<span>%s</span>" $tag) -}}
   {{- end -}}
-  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $tagLinks ", ") -}}
+  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $tagLinks " · ") -}}
 {{- end -}}
 {{- end -}}
 
@@ -37,7 +37,7 @@
     {{- $category := . -}}
     {{- $categoryLinks = $categoryLinks | append (printf "<span>%s</span>" $category) -}}
   {{- end -}}
-  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $categoryLinks ", ") -}}
+  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $categoryLinks " · ") -}}
 {{- end -}}
 {{- end -}}
 
