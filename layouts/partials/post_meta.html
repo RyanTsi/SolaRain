@@ -18,6 +18,33 @@
 {{- end }}
 {{- end }}
 
+{{- $tagCategoryMeta := slice -}}
+{{- if (.Param "ShowTags") -}}
+{{- with .Params.tags -}}
+  {{- $tagLinks := slice -}}
+  {{- range . -}}
+    {{- $tag := . -}}
+    {{- $tagLinks = $tagLinks | append (printf "<span>%s</span>" $tag) -}}
+  {{- end -}}
+  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $tagLinks "&nbsp;·&nbsp;") -}}
+{{- end -}}
+{{- end -}}
+
+{{- if (.Param "ShowCategories") -}}
+{{- with .Params.categories -}}
+  {{- $categoryLinks := slice -}}
+  {{- range . -}}
+    {{- $category := . -}}
+    {{- $categoryLinks = $categoryLinks | append (printf "<span>%s</span>" $category) -}}
+  {{- end -}}
+  {{- $tagCategoryMeta = $tagCategoryMeta | append (delimit $categoryLinks "&nbsp;·&nbsp;") -}}
+{{- end -}}
+{{- end -}}
+
+{{- if gt (len $tagCategoryMeta) 0 -}}
+  {{- $scratch.Add "meta" (slice (delimit $tagCategoryMeta "&nbsp;|&nbsp;")) -}}
+{{- end -}}
+
 {{- with ($scratch.Get "meta") }}
 {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
 {{- end -}}
