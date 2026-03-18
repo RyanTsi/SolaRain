@@ -1,19 +1,22 @@
 {{- if (.Param "ShowBreadCrumbs") -}}
+{{- $url := replace .Parent.Permalink (printf "%s" site.Home.Permalink) "" -}}
+{{- $lang_url := strings.TrimPrefix (printf "%s/" .Lang) $url -}}
+{{- $hideHome := or (.Param "HideHomeInBreadcrumbs") site.Params.HideHomeInBreadcrumbs -}}
 <div class="breadcrumbs">
-    {{- $url := replace .Parent.Permalink (printf "%s" site.Home.Permalink) "" }}
-    {{- $lang_url := strings.TrimPrefix (printf "%s/" .Lang) $url -}}
-
+    {{- if not $hideHome -}}
     <a href="{{ "" | absLangURL }}">{{ i18n "home" | default "Home" }}</a>
-    {{- $scratch := newScratch }}
-    {{- range $index, $element := split $lang_url "/" }}
-
-    {{- $scratch.Add "path" (printf "%s/" $element )}}
-    {{- $bc_pg := site.GetPage ($scratch.Get "path") -}}
-
-    {{- if (and ($bc_pg) (gt (len . ) 0))}}
-    {{- print "&nbsp;»&nbsp;" | safeHTML -}}<a href="{{ $bc_pg.Permalink }}">{{ $bc_pg.Name }}</a>
-    {{- end }}
-
+    {{- end -}}
+    {{- $path := newScratch -}}
+    {{- $printed := newScratch -}}
+    {{- $printed.Set "first" true -}}
+    {{- range $index, $element := split $lang_url "/" -}}
+        {{- $path.Add "path" (printf "%s/" $element ) -}}
+        {{- $bc_pg := site.GetPage ($path.Get "path") -}}
+        {{- if (and ($bc_pg) (gt (len . ) 0)) -}}
+            {{- if not ($printed.Get "first") -}}{{- print "&nbsp;»&nbsp;" | safeHTML -}}{{- end -}}
+            <a href="{{ $bc_pg.Permalink }}">{{ $bc_pg.Name }}</a>
+            {{- $printed.Set "first" false -}}
+        {{- end -}}
     {{- end -}}
 </div>
 {{- end -}}
